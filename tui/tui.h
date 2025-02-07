@@ -19,6 +19,15 @@ typedef struct {
 
 EditorInfoBar build_info();
 
+void tui_enable_raw_mode(struct termios *termios_p, struct termios *termios_og);
+
+void tui_disable_raw_mode(struct termios *termios_og);
+
+void tui_enable_alternate_buffer();
+
+void tui_disable_alternate_buffer();
+void tui_setup();
+
 // pub fn update_tui(editor_state : &mut EditorState) {
 //   let window_inf = InformationBar::new (&terminol::get_terminal_size());
 //   let mode = editor_state.editor_mode.value();

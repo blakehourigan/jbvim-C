@@ -5,7 +5,7 @@
 #include <time.h>
 #include <unistd.h>
 
-void sort_response(Cursor *curs, char *s) {
+static void sort_response(Cursor *curs, char *s) {
   int len = sizeof(s);
   int row = 0;
 
@@ -47,7 +47,7 @@ void sort_response(Cursor *curs, char *s) {
   }
 }
 
-void get_cursor_coords(Cursor *curs) {
+void cursor_get_coords(Cursor *curs) {
   char *s = malloc(sizeof(char) * 30);
   char buf;
   int i = 0;
@@ -73,80 +73,98 @@ void get_cursor_coords(Cursor *curs) {
   };
 
   sort_response(curs, s);
+
+  // cleanup
+  free(s);
 }
 
-void enable_bar_cursor() { write(STDOUT_FILENO, "\x1b[6 q", 5); }
-void enable_standard_cursor() { write(STDOUT_FILENO, "\x1b[0 q", 5); }
-void move_right(int num) {
+void cursor_enable_bar_cursor() { write(STDOUT_FILENO, "\x1b[6 q", 5); }
+void cursor_enable_standard_cursor() { write(STDOUT_FILENO, "\x1b[0 q", 5); }
+void cursor_move_right(int num) {
   unsigned long size = sizeof("\x1b[C") + sizeof(num);
   char *s = malloc(size);
   snprintf(s, size, "\x1b[%dC", num);
 
   write(STDOUT_FILENO, "\x1b[{num}C", size);
+
+  // cleanup
   free(s);
 }
-void move_left(int num) {
+void cursor_move_left(int num) {
   unsigned long size = sizeof("\x1b[D") + sizeof(num);
   char *s = malloc(size);
   snprintf(s, size, "\x1b[%dD", num);
   write(STDOUT_FILENO, s, size);
+
+  // cleanup
   free(s);
 }
-void move_up(int num) {
+void cursor_move_up(int num) {
   unsigned long size = sizeof("\x1b[A") + sizeof(num);
   char *s = malloc(size);
   snprintf(s, size, "\x1b[%dA", num);
   write(STDOUT_FILENO, s, size);
+
+  // cleanup
   free(s);
 }
-void move_down(int num) {
+void cursor_move_down(int num) {
   unsigned long size = sizeof("\x1b[B") + sizeof(num);
   char *s = malloc(size);
   snprintf(s, size, "\x1b[%dB", num);
   write(STDOUT_FILENO, s, size);
+
+  // cleanup
   free(s);
 }
-void move_cursor_to(int line, int column) {
+void cursor_move_to(int line, int column) {
   unsigned long size = sizeof("\x1b[;f") + sizeof(line) + sizeof(column);
   char *s = malloc(size);
   snprintf(s, size, "\x1b[%d;%df", line, column);
   write(STDOUT_FILENO, s, size);
-}
-void move_home() { write(STDOUT_FILENO, "\x1b[H", 3); }
 
-void set_foreground(int color) {
+  // cleanup
+  free(s);
+}
+void cursor_move_home() { write(STDOUT_FILENO, "\x1b[H", 3); }
+
+void cursor_set_foreground(int color) {
   unsigned long size = sizeof("\x1b[38;5;m") + sizeof(color);
   char *s = malloc(size);
   snprintf(s, size, "\x1b[38;5;%dm", color);
   write(STDOUT_FILENO, s, size);
+
+  // cleanup
   free(s);
 }
-void set_background(int color) {
+void cursor_set_background(int color) {
   unsigned long size = sizeof("\x1b[48;5;m") + sizeof(color);
   char *s = malloc(size);
   snprintf(s, size, "\x1b[48;5;%dm", color);
   write(STDOUT_FILENO, s, size);
+
+  // cleanup
   free(s);
 }
 
-void delete_end_of_line() { write(STDOUT_FILENO, "\x1b[0K", 4); }
-void return_newline(Cursor *curs) {
-  get_cursor_coords(curs);
-  move_cursor_to(curs->line + 1, curs->col);
+void cursor_delete_end_of_line() { write(STDOUT_FILENO, "\x1b[0K", 4); }
+void cursor_return_newline(Cursor *curs) {
+  cursor_get_coords(curs);
+  cursor_move_to(curs->line + 1, curs->col);
 }
-void reset_modes() { write(STDOUT_FILENO, "\x1b[0m", 3); }
-void save_cursor_position() { write(STDOUT_FILENO, "\x1b[s", 3); }
-void restore_cursor_position() { write(STDOUT_FILENO, "\x1b[u", 3); }
-void make_invisible() { write(STDOUT_FILENO, "\x1b[?25h", 6); }
-void make_visible() { write(STDOUT_FILENO, "\x1b[28m", 5); }
+void cursor_reset_modes() { write(STDOUT_FILENO, "\x1b[0m", 3); }
+void cursor_save_cursor_position() { write(STDOUT_FILENO, "\x1b[s", 3); }
+void cursor_restore_cursor_position() { write(STDOUT_FILENO, "\x1b[u", 3); }
+void cursor_make_invisible() { write(STDOUT_FILENO, "\x1b[?25h", 6); }
+void cursor_make_visible() { write(STDOUT_FILENO, "\x1b[28m", 5); }
 
-void backspace() {
+void cursor_backspace() {
   write(STDOUT_FILENO, "\b", 1);
-  move_left(1);
+  cursor_move_left(1);
   write(STDOUT_FILENO, " ", 1);
 }
 
-void write_char(char character) { write(STDOUT_FILENO, &character, 1); }
+void cursor_write_char(char character) { write(STDOUT_FILENO, &character, 1); }
 
 void delay(int seconds) {
   unsigned int ret_time = time(0) + seconds;
@@ -154,19 +172,21 @@ void delay(int seconds) {
   }
 }
 
-void test_coloring() {
-  set_background(2);
-  set_foreground(5);
+static void test_coloring() {
+  cursor_set_background(2);
+  cursor_set_foreground(5);
   for (int i = 0; i < 150; i++) {
     write(STDOUT_FILENO, "c", 1);
   }
 }
 
-void test_get_coords() {
+static void test_get_coords() {
   Cursor *cursor = malloc(sizeof(Cursor));
 
-  get_cursor_coords(cursor);
+  cursor_get_coords(cursor);
   printf("(line: %d, col: %d)", cursor->line, cursor->col);
+
+  free(cursor);
 }
 
 // int main() {

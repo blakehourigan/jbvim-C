@@ -11,37 +11,37 @@ typedef struct {
 /// constructs new instance of cursor with current and curosor row and col
 /// using ascii escape character "\x1b[6n". stdout is flushed and stdin
 /// response from terminal is read into cursor instance.
-void get_cursor_coords(Cursor *curs);
+void cursor_get_coords(Cursor *curs);
 
-void enable_bar_cursor();
-void enable_standard_cursor();
-void move_right(int num);
-void move_left(int num);
-void move_up(int num);
+void cursor_enable_bar_cursor();
+void cursor_enable_standard_cursor();
+void cursor_move_right(int num);
+void cursor_move_left(int num);
+void cursor_move_up(int num);
 
-void move_down(int num);
+void cursor_move_down(int num);
 
-void move_cursor_to(int line, int column);
-void move_home();
+void cursor_move_to(int line, int column);
+void cursor_move_home();
 
-void return_newline(Cursor *curs);
+void cursor_return_newline(Cursor *curs);
 
-void save_cursor_position();
+void cursor_save_cursor_position();
 
-void restore_cursor_position();
+void cursor_restore_cursor_position();
 
-void backspace();
+void cursor_backspace();
 
-void write_char(char character);
+void cursor_write_char(char character);
 
-void set_foreground(int color);
+void cursor_set_foreground(int color);
 
-void set_background(int color);
+void cursor_set_background(int color);
 
-void delete_end_of_line();
+void cursor_delete_end_of_line();
 
-void reset_modes();
+void cursor_reset_modes();
 
-void make_invisible();
+void cursor_make_invisible();
 
-void make_visible();
+void cursor_make_visible();
