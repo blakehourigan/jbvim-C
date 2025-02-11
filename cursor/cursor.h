@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <unistd.h>
 
-typedef struct {
+#ifndef CURSOR_H
+#define CURSOR_H
+
+typedef struct Cursor {
   int line;
   int col;
 } Cursor;
@@ -15,11 +18,11 @@ void cursor_get_coords(Cursor *curs);
 
 void cursor_enable_bar_cursor();
 void cursor_enable_standard_cursor();
-void cursor_move_right(int num);
-void cursor_move_left(int num);
-void cursor_move_up(int num);
 
-void cursor_move_down(int num);
+void cursor_move_right();
+void cursor_move_left();
+void cursor_move_up();
+void cursor_move_down();
 
 void cursor_move_to(int line, int column);
 void cursor_move_home();
@@ -45,3 +48,5 @@ void cursor_reset_modes();
 void cursor_make_invisible();
 
 void cursor_make_visible();
+
+#endif

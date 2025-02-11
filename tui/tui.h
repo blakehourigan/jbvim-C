@@ -2,6 +2,8 @@
 
 #define TUI_H_INCLUDED
 
+#include "../cursor/cursor.h"
+#include "../editor_common.h"
 #include <sys/ioctl.h>
 #include <termios.h>
 
@@ -26,7 +28,10 @@ void tui_disable_raw_mode(struct termios *termios_og);
 void tui_enable_alternate_buffer();
 
 void tui_disable_alternate_buffer();
-void tui_setup();
+void tui_setup(struct termios *termios_og);
+void tui_refresh(enum EditorMode *mode);
+void tui_move_to_command(EditorInfoBar *info_bar);
+void tui_exit_command(EditorInfoBar *info_bar, Cursor *prev_curs_pos);
 
 // pub fn update_tui(editor_state : &mut EditorState) {
 //   let window_inf = InformationBar::new (&terminol::get_terminal_size());

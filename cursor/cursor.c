@@ -80,43 +80,12 @@ void cursor_get_coords(Cursor *curs) {
 
 void cursor_enable_bar_cursor() { write(STDOUT_FILENO, "\x1b[6 q", 5); }
 void cursor_enable_standard_cursor() { write(STDOUT_FILENO, "\x1b[0 q", 5); }
-void cursor_move_right(int num) {
-  unsigned long size = sizeof("\x1b[C") + sizeof(num);
-  char *s = malloc(size);
-  snprintf(s, size, "\x1b[%dC", num);
 
-  write(STDOUT_FILENO, "\x1b[{num}C", size);
+void cursor_move_right() { write(STDOUT_FILENO, "\x1b[1C", 4); }
+void cursor_move_left() { write(STDOUT_FILENO, "\x1b[1D", 4); }
+void cursor_move_up() { write(STDOUT_FILENO, "\x1b[1A", 4); }
+void cursor_move_down() { write(STDOUT_FILENO, "\x1b[1B", 4); }
 
-  // cleanup
-  free(s);
-}
-void cursor_move_left(int num) {
-  unsigned long size = sizeof("\x1b[D") + sizeof(num);
-  char *s = malloc(size);
-  snprintf(s, size, "\x1b[%dD", num);
-  write(STDOUT_FILENO, s, size);
-
-  // cleanup
-  free(s);
-}
-void cursor_move_up(int num) {
-  unsigned long size = sizeof("\x1b[A") + sizeof(num);
-  char *s = malloc(size);
-  snprintf(s, size, "\x1b[%dA", num);
-  write(STDOUT_FILENO, s, size);
-
-  // cleanup
-  free(s);
-}
-void cursor_move_down(int num) {
-  unsigned long size = sizeof("\x1b[B") + sizeof(num);
-  char *s = malloc(size);
-  snprintf(s, size, "\x1b[%dB", num);
-  write(STDOUT_FILENO, s, size);
-
-  // cleanup
-  free(s);
-}
 void cursor_move_to(int line, int column) {
   unsigned long size = sizeof("\x1b[;f") + sizeof(line) + sizeof(column);
   char *s = malloc(size);
