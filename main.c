@@ -18,13 +18,6 @@ void main_delay(int seconds) {
   }
 }
 
-void write_contents(GapBuffer *buffer, int len_str) {
-  for (int i = 0; i < len_str; i++) {
-    write(STDOUT_FILENO, &buffer->buffer[i], sizeof(buffer->buffer[i]));
-  }
-  cursor_move_home();
-}
-
 void basic_movement_handler(unsigned char *input, struct EditorState *state) {
   // <C-c> | esc| arrows
   // 3 | 27 | 183 | 184 | 185 | 186
@@ -110,7 +103,7 @@ void handle_normal_mode(unsigned char *input, struct EditorState *state,
   }
 }
 void process_command(struct EditorState *state, char *command,
-                     GapBuffer *buffer) {
+                     GapBufferDoc *buffer) {
   int i = 0;
   char c = command[0];
   while (1) {
@@ -135,7 +128,7 @@ void process_command(struct EditorState *state, char *command,
   }
 }
 void handle_command_mode(unsigned char *input, struct EditorState *state,
-                         GapBuffer *buffer, EditorInfoBar *info_bar) {
+                         GapBufferDoc *buffer, EditorInfoBar *info_bar) {
   char *command = malloc(sizeof(char) * COMMAND_SIZE);
   if (!command) {
     return;
@@ -177,7 +170,7 @@ void handle_command_mode(unsigned char *input, struct EditorState *state,
   free(command);
 }
 
-int main() {
+int main(int argc, char *argv[]) {
   struct termios termios_og;
   struct Cursor previous_cursor_pos;
   struct EditorState *state = malloc(sizeof(struct EditorState));
@@ -192,16 +185,20 @@ int main() {
 
   // read exiting file if it exists
 
-  char str[] = "hello, world!";
-  int len_str = str_len(str);
-
-  GapBuffer *buffer = gap_init(str);
+  // GapBuffer *buffer = gap_init_line(str);
+  char *file_name = malloc(sizeof(char) * 150);
+  if (argc > 1) {
+    file_name = argv[1];
+  } else {
+    file_name = "tmp.txt";
+  }
+  GapBufferDoc *buffer = gap_init_doc(file_name);
 
   tui_setup(&termios_og);
 
-  write_contents(buffer, len_str);
-
   // writing exiting line contents to the screen
+  write_content(buffer, 0, 20);
+  cursor_move_home();
 
   // begin main loop
   while (1) {
