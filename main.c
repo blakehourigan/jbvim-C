@@ -2,6 +2,7 @@
 #include "editor_common.h"
 #include "gap_buffer/gap_buffer.h"
 #include "tui/tui.h"
+#include <signal.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,11 +19,13 @@ void main_delay(int seconds) {
   }
 }
 
-void basic_movement_handler(unsigned char *input, struct EditorState *state) {
+void basic_movement_handler(unsigned char *input, struct EditorState *state,
+                            GapBufferDoc *doc) {
   // <C-c> | esc| arrows
   // 3 | 27 | 183 | 184 | 185 | 186
   char error_msg[] = "keyboard shortcut not found";
 
+  GapBuffer *line = *doc->end;
   int input_num = *input;
 
   switch (*input) {
@@ -44,7 +47,9 @@ void basic_movement_handler(unsigned char *input, struct EditorState *state) {
     // right arrow or l key
   case 'l':
   case 185:
-    cursor_move_right();
+    if (is_last_char(line)) {
+      cursor_move_right();
+    }
     break;
     // left arrow or h key
   case 'h':
@@ -56,7 +61,8 @@ void basic_movement_handler(unsigned char *input, struct EditorState *state) {
   }
 }
 
-void handle_insert_mode(unsigned char *input, struct EditorState *state) {
+void handle_insert_mode(unsigned char *input, GapBufferDoc *doc,
+                        struct EditorState *state) {
   switch (*input) {
   case 3:
   case 27:
@@ -69,7 +75,7 @@ void handle_insert_mode(unsigned char *input, struct EditorState *state) {
   }
 }
 void handle_normal_mode(unsigned char *input, struct EditorState *state,
-                        EditorInfoBar *info_bar) {
+                        GapBufferDoc *doc, EditorInfoBar *info_bar) {
 
   switch (*input) {
   case 3:
@@ -86,7 +92,7 @@ void handle_normal_mode(unsigned char *input, struct EditorState *state,
     // left arrow or h key
   case 'h':
   case 186:
-    basic_movement_handler(input, state);
+    basic_movement_handler(input, state, doc);
     break;
   case 'i':
     state->mode = Insert;
@@ -128,7 +134,7 @@ void process_command(struct EditorState *state, char *command,
   }
 }
 void handle_command_mode(unsigned char *input, struct EditorState *state,
-                         GapBufferDoc *buffer, EditorInfoBar *info_bar) {
+                         GapBufferDoc *doc, EditorInfoBar *info_bar) {
   char *command = malloc(sizeof(char) * COMMAND_SIZE);
   if (!command) {
     return;
@@ -147,7 +153,7 @@ void handle_command_mode(unsigned char *input, struct EditorState *state,
         // handle ascii for enter key
       case 13:
         command[i] = '\0';
-        process_command(state, command, buffer);
+        process_command(state, command, doc);
         break;
       case 3:
       case 27:
@@ -171,6 +177,10 @@ void handle_command_mode(unsigned char *input, struct EditorState *state,
 }
 
 int main(int argc, char *argv[]) {
+  // redirect errors to a file so in the event of a program crash we can still
+  // read the errors.
+  freopen("error_log.txt", "a", stderr);
+
   struct termios termios_og;
   struct Cursor previous_cursor_pos;
   struct EditorState *state = malloc(sizeof(struct EditorState));
@@ -192,12 +202,12 @@ int main(int argc, char *argv[]) {
   } else {
     file_name = "tmp.txt";
   }
-  GapBufferDoc *buffer = gap_init_doc(file_name);
+  GapBufferDoc *doc = gap_init_doc(file_name);
 
   tui_setup(&termios_og);
 
   // writing exiting line contents to the screen
-  write_content(buffer, 0, 20);
+  write_content(doc, 0, 20);
   cursor_move_home();
 
   // begin main loop
@@ -221,17 +231,17 @@ int main(int argc, char *argv[]) {
       case Normal:
         // pass in the input character and decide whether to change modes,
         // move cursor, etc
-        handle_normal_mode(&full_input, state, &info_bar);
+        handle_normal_mode(&full_input, state, doc, &info_bar);
         break;
       case Insert:
         // pass in character pressed and process whether we should change
         // modes or insert the character, move line contents, etc
-        handle_insert_mode(&full_input, state);
+        handle_insert_mode(&full_input, doc, state);
         break;
       case Command:
         // pass the initial input char into command mode and hand off
         // control until command is submitted OR mode is changed
-        handle_command_mode(&full_input, state, buffer, &info_bar);
+        handle_command_mode(&full_input, state, doc, &info_bar);
         break;
       default:
         break;

@@ -10,10 +10,10 @@ enum EditorMode {
   Command,
 };
 
-struct EditorState {
+typedef struct EditorState {
   enum EditorMode mode;
   struct termios og_settings;
   Cursor previous_curs_pos;
-};
+} EditorState;
 
 #endif // !EDITOR_COMMON_H

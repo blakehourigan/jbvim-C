@@ -7,11 +7,11 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 
-typedef struct {
+typedef struct ContentOffset {
   int offset;
 } ContentOffset;
 
-typedef struct {
+typedef struct EditorInfoBar {
   int col_length;
   int row;
   int command_row;

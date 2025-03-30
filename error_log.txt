@@ -1,0 +1,54 @@
+=================================================================
+==57752==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x51d0000009e0 at pc 0x55a97b8fc5f6 bp 0x7fff5fdaf8a0 sp 0x7fff5fdaf890
+READ of size 8 at 0x51d0000009e0 thread T0
+    #0 0x55a97b8fc5f5 in basic_movement_handler /home/blake/Documents/c_prog/jbvim/main.c:28
+    #1 0x55a97b8fc9b5 in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:95
+    #2 0x55a97b8fd705 in main /home/blake/Documents/c_prog/jbvim/main.c:232
+    #3 0x7f0297b3d487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #4 0x7f0297b3d54b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x55a97b8fa2a4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32a4) (BuildId: cbe645462ad747960b59c8b6a5f0d37d71a7d282)
+
+0x51d0000009e0 is located 0 bytes after 2400-byte region [0x51d000000080,0x51d0000009e0)
+allocated by thread T0 here:
+    #0 0x7f0297efd721 in malloc /usr/src/debug/gcc/gcc/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x55a97b8fbe19 in grow_buffer_doc gap_buffer/gap_buffer.c:300
+    #2 0x55a97b8fbd7c in insert_left_doc gap_buffer/gap_buffer.c:289
+    #3 0x55a97b8fba18 in gap_init_doc gap_buffer/gap_buffer.c:254
+    #4 0x55a97b8fd3ea in main /home/blake/Documents/c_prog/jbvim/main.c:203
+    #5 0x7f0297b3d487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x7f0297b3d54b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #7 0x55a97b8fa2a4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32a4) (BuildId: cbe645462ad747960b59c8b6a5f0d37d71a7d282)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /home/blake/Documents/c_prog/jbvim/main.c:28 in basic_movement_handler
+Shadow bytes around the buggy address:
+  0x51d000000700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000780: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000800: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x51d000000980: 00 00 00 00 00 00 00 00 00 00 00 00[fa]fa fa fa
+  0x51d000000a00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000a80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000b00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000b80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000c00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==57752==ABORTING
