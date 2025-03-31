@@ -2,7 +2,7 @@
 #define LINE_BUFFER_H_INCLUDED
 
 // each line and should have 150 elements to begin
-const int INIT_LINE_SIZE = 150;
+#define INIT_LINE_SIZE 150
 
 typedef struct lineBuffer {
     char *start; // a pointer to the START of the buffer.
@@ -15,7 +15,7 @@ typedef struct lineBuffer {
     int size;
 } lineBuffer;
 
-lineBuffer init(char *line_content);
+lineBuffer init_line(char *line_content);
 
 void move_gap_right_line(lineBuffer *line);
 
@@ -27,8 +27,8 @@ void grow_line(lineBuffer *line);
 
 void delete_item_line(lineBuffer *line);
 
-int is_last_char(lineBuffer *line);
+void move_to_line_start(lineBuffer *line);
 
-void dbg_buffer(lineBuffer *line, int buf_num);
+int move_to_line_end(lineBuffer *line);
 
 #endif

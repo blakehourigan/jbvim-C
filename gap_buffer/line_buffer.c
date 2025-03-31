@@ -57,7 +57,7 @@ void print_buffer(lineBuffer *line) {
     printf("\n");
 }
 
-lineBuffer init(char *line_content) {
+lineBuffer init_line(char *line_content) {
     // by avoiding the allocation of a heap object here and using struct copying
     // instead, we trade complexity for a slight hit in speed, however copying 3
     // pointers is really fast, so not a huge deal **in this case**
@@ -83,8 +83,6 @@ lineBuffer init(char *line_content) {
         line.buffer[i] = '\0';
     }
 
-    print_buffer(&line);
-
     return line;
 }
 
@@ -97,7 +95,6 @@ void insert_left_line(lineBuffer *line, char character) {
         line->filled_items++;
     } else {
         grow_line(line);
-        print_buffer(line);
 
         *(line->start) = character;
 
@@ -177,23 +174,23 @@ void grow_line(lineBuffer *line) {
      * every time that we expand we increase size by INIT_LINE_SIZE
      */
 
-    char *new_buffer = malloc(sizeof(char) * (line->size + INIT_LINE_SIZE));
+    int new_len = line->size + INIT_LINE_SIZE;
 
-    for (int i = 0; i < line->size; i++) {
-        new_buffer[i] = line->buffer[i];
+    char *new_buffer = malloc(sizeof(char) * new_len);
 
+    for (int i = 0; i < new_len; i++) {
+        if (i < line->size) {
+
+            new_buffer[i] = line->buffer[i];
+        } else {
+            new_buffer[i] = '\0';
+        }
+
+        // once you find the start, make sure the new buffer gets the same
+        // buffer start location
         if (line->start == &(line->buffer[i])) {
-            printf("setting new start");
             line->start = &(new_buffer[i]);
         }
-    }
-
-    for (int i = line->size; i < line->size + INIT_LINE_SIZE; i++) {
-        if (line->start == &(line->buffer[i])) {
-            printf("setting new start");
-            line->start = &(new_buffer[i]);
-        }
-        new_buffer[i] = '\0';
     }
 
     line->size += INIT_LINE_SIZE;
@@ -204,45 +201,49 @@ void grow_line(lineBuffer *line) {
     line->buffer = new_buffer;
 }
 
-int main(int argc, char *argv[]) {
-    // lineBuffer line = init(NULL);
-    lineBuffer line = init("hello, world!");
-
-    char insert[] = "sad ";
-
-    print_buffer(&line);
-
-    for (int i = 0; i < 200; i++) {
-        insert_left_line(&line, 'c');
-    }
-    print_buffer(&line);
-
-    // move_to_line_start(&line);
-
-    // print_buffer(&line);
-
-    // move_to_line_end(&line);
-
-    // print_buffer(&line);
-
-    // for (int i = 0; i < 6; i++) {
-    //     move_gap_left_line(&line);
-    //     print_buffer(&line);
-    // }
-
-    // int insertion = len_string(insert);
-
-    // for (int i = 0; i < insertion; i++) {
-    //     insert_left_line(&line, insert[i]);
-    // }
-
-    // for (int i = 0; i < 6; i++) {
-    //     move_gap_right_line(&line);
-    //     print_buffer(&line);
-    // }
-
-    // free the buffer held inside of the line
-    free(line.buffer);
-
-    return 1;
-}
+// int main(int argc, char *argv[]) {
+//     // lineBuffer line = init(NULL);
+//     lineBuffer line = init("hello, world!");
+//
+//     char insert[] = "sad ";
+//
+//     for (int i = 0; i < 125; i++) {
+//         insert_left_line(&line, 'c');
+//     }
+//     for (int i = 0; i < 125; i++) {
+//         move_gap_left_line(&line);
+//     }
+//     for (int i = 0; i < 125; i++) {
+//         insert_left_line(&line, 'c');
+//     }
+//
+//     print_buffer(&line);
+//     // move_to_line_start(&line);
+//
+//     // print_buffer(&line);
+//
+//     // move_to_line_end(&line);
+//
+//     // print_buffer(&line);
+//
+//     // for (int i = 0; i < 6; i++) {
+//     //     move_gap_left_line(&line);
+//     //     print_buffer(&line);
+//     // }
+//
+//     // int insertion = len_string(insert);
+//
+//     // for (int i = 0; i < insertion; i++) {
+//     //     insert_left_line(&line, insert[i]);
+//     // }
+//
+//     // for (int i = 0; i < 6; i++) {
+//     //     move_gap_right_line(&line);
+//     //     print_buffer(&line);
+//     // }
+//
+//     // free the buffer held inside of the line
+//     free(line.buffer);
+//
+//     return 1;
+// }

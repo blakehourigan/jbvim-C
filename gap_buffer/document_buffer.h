@@ -7,16 +7,19 @@
 const int INIT_DOC_SIZE = 150;
 
 typedef struct DocumentGapBuffer {
-    lineBuffer *start;  // pointer to the first element
-    lineBuffer *end;    // pointer to last element
-    lineBuffer *buffer; // pointer to the actual buffer of GapBuffer elements
+    lineBuffer *start; // a pointer to the START of the buffer.
+    lineBuffer *end; // a pointer to the END of the buffer. NOT end of content,
+                     // end of BUFFER.
+    lineBuffer *buffer; // pointer to the buffer object itself.
 
-    int filled_items;
+    int filled_items; // keeps track of how many items are actually inside of
+                      // the buffer.
+    int size;
 } DocumentGapBuffer;
 
-DocumentGapBuffer *init(char *str);
+DocumentGapBuffer init_document(char *str);
 
-void insert_into_doc(DocumentGapBuffer *document, lineBuffer *item);
+void insert_into_doc(DocumentGapBuffer *document, lineBuffer item);
 
 void move_gap_right_doc(DocumentGapBuffer *doc);
 
