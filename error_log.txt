@@ -52,3 +52,813 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   Left alloca redzone:     ca
   Right alloca redzone:    cb
 ==57752==ABORTING
+=================================================================
+==186645==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x51d0000009e0 at pc 0x55e15bf495f6 bp 0x7fff48709a10 sp 0x7fff48709a00
+READ of size 8 at 0x51d0000009e0 thread T0
+    #0 0x55e15bf495f5 in basic_movement_handler /home/blake/Documents/c_prog/jbvim/main.c:28
+    #1 0x55e15bf499b5 in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:95
+    #2 0x55e15bf4a705 in main /home/blake/Documents/c_prog/jbvim/main.c:232
+    #3 0x7f7abaf3d487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #4 0x7f7abaf3d54b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x55e15bf472a4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32a4) (BuildId: cbe645462ad747960b59c8b6a5f0d37d71a7d282)
+
+0x51d0000009e0 is located 0 bytes after 2400-byte region [0x51d000000080,0x51d0000009e0)
+allocated by thread T0 here:
+    #0 0x7f7abb2fd721 in malloc /usr/src/debug/gcc/gcc/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x55e15bf48e19 in grow_buffer_doc gap_buffer/gap_buffer.c:300
+    #2 0x55e15bf48d7c in insert_left_doc gap_buffer/gap_buffer.c:289
+    #3 0x55e15bf48a18 in gap_init_doc gap_buffer/gap_buffer.c:254
+    #4 0x55e15bf4a3ea in main /home/blake/Documents/c_prog/jbvim/main.c:203
+    #5 0x7f7abaf3d487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x7f7abaf3d54b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #7 0x55e15bf472a4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32a4) (BuildId: cbe645462ad747960b59c8b6a5f0d37d71a7d282)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /home/blake/Documents/c_prog/jbvim/main.c:28 in basic_movement_handler
+Shadow bytes around the buggy address:
+  0x51d000000700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000780: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000800: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x51d000000980: 00 00 00 00 00 00 00 00 00 00 00 00[fa]fa fa fa
+  0x51d000000a00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000a80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000b00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000b80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000c00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==186645==ABORTING
+=================================================================
+==186669==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x51d0000009e0 at pc 0x558aaf5025f6 bp 0x7ffd66f3ef50 sp 0x7ffd66f3ef40
+READ of size 8 at 0x51d0000009e0 thread T0
+    #0 0x558aaf5025f5 in basic_movement_handler /home/blake/Documents/c_prog/jbvim/main.c:28
+    #1 0x558aaf5029b5 in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:95
+    #2 0x558aaf503705 in main /home/blake/Documents/c_prog/jbvim/main.c:232
+    #3 0x7fb760f3d487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #4 0x7fb760f3d54b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x558aaf5002a4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32a4) (BuildId: cbe645462ad747960b59c8b6a5f0d37d71a7d282)
+
+0x51d0000009e0 is located 0 bytes after 2400-byte region [0x51d000000080,0x51d0000009e0)
+allocated by thread T0 here:
+    #0 0x7fb7612fd721 in malloc /usr/src/debug/gcc/gcc/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x558aaf501e19 in grow_buffer_doc gap_buffer/gap_buffer.c:300
+    #2 0x558aaf501d7c in insert_left_doc gap_buffer/gap_buffer.c:289
+    #3 0x558aaf501a18 in gap_init_doc gap_buffer/gap_buffer.c:254
+    #4 0x558aaf5033ea in main /home/blake/Documents/c_prog/jbvim/main.c:203
+    #5 0x7fb760f3d487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x7fb760f3d54b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #7 0x558aaf5002a4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32a4) (BuildId: cbe645462ad747960b59c8b6a5f0d37d71a7d282)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /home/blake/Documents/c_prog/jbvim/main.c:28 in basic_movement_handler
+Shadow bytes around the buggy address:
+  0x51d000000700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000780: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000800: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x51d000000980: 00 00 00 00 00 00 00 00 00 00 00 00[fa]fa fa fa
+  0x51d000000a00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000a80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000b00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000b80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000c00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==186669==ABORTING
+=================================================================
+==186686==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x51d0000009e0 at pc 0x5601aebe05f6 bp 0x7ffd474db880 sp 0x7ffd474db870
+READ of size 8 at 0x51d0000009e0 thread T0
+    #0 0x5601aebe05f5 in basic_movement_handler /home/blake/Documents/c_prog/jbvim/main.c:28
+    #1 0x5601aebe09b5 in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:95
+    #2 0x5601aebe1705 in main /home/blake/Documents/c_prog/jbvim/main.c:232
+    #3 0x7f5a96a35487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #4 0x7f5a96a3554b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x5601aebde2a4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32a4) (BuildId: cbe645462ad747960b59c8b6a5f0d37d71a7d282)
+
+0x51d0000009e0 is located 0 bytes after 2400-byte region [0x51d000000080,0x51d0000009e0)
+allocated by thread T0 here:
+    #0 0x7f5a96cfd721 in malloc /usr/src/debug/gcc/gcc/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5601aebdfe19 in grow_buffer_doc gap_buffer/gap_buffer.c:300
+    #2 0x5601aebdfd7c in insert_left_doc gap_buffer/gap_buffer.c:289
+    #3 0x5601aebdfa18 in gap_init_doc gap_buffer/gap_buffer.c:254
+    #4 0x5601aebe13ea in main /home/blake/Documents/c_prog/jbvim/main.c:203
+    #5 0x7f5a96a35487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x7f5a96a3554b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #7 0x5601aebde2a4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32a4) (BuildId: cbe645462ad747960b59c8b6a5f0d37d71a7d282)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /home/blake/Documents/c_prog/jbvim/main.c:28 in basic_movement_handler
+Shadow bytes around the buggy address:
+  0x51d000000700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000780: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000800: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x51d000000900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x51d000000980: 00 00 00 00 00 00 00 00 00 00 00 00[fa]fa fa fa
+  0x51d000000a00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000a80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000b00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000b80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x51d000000c00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==186686==ABORTING
+=================================================================
+==186714==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7f674eb01e27 at pc 0x556cba4f3270 bp 0x7ffc49779050 sp 0x7ffc49779040
+WRITE of size 1 at 0x7f674eb01e27 thread T0
+    #0 0x556cba4f326f in tui_draw_mode tui/tui.c:135
+    #1 0x556cba4f3788 in tui_refresh tui/tui.c:185
+    #2 0x556cba4f0a72 in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:105
+    #3 0x556cba4f1705 in main /home/blake/Documents/c_prog/jbvim/main.c:232
+    #4 0x7f6750d3d487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x7f6750d3d54b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x556cba4ee2a4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32a4) (BuildId: cbe645462ad747960b59c8b6a5f0d37d71a7d282)
+
+Address 0x7f674eb01e27 is located in stack of thread T0 at offset 39 in frame
+    #0 0x556cba4f2d72 in tui_draw_mode tui/tui.c:117
+
+  This frame has 4 object(s):
+    [32, 39) 'mode_str' (line 120) <== Memory access at offset 39 overflows this variable
+    [64, 71) 'str' (line 123)
+    [96, 103) 'str' (line 128)
+    [128, 136) 'str' (line 133)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow tui/tui.c:135 in tui_draw_mode
+Shadow bytes around the buggy address:
+  0x7f674eb01b80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f674eb01c00: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f674eb01c80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f674eb01d00: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f674eb01d80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7f674eb01e00: f1 f1 f1 f1[07]f2 f2 f2 07 f2 f2 f2 07 f2 f2 f2
+  0x7f674eb01e80: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f674eb01f00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f674eb01f80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f674eb02000: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f674eb02080: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==186714==ABORTING
+=================================================================
+==191149==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7f890f701b27 at pc 0x55c86580a27a bp 0x7ffc188d6890 sp 0x7ffc188d6880
+WRITE of size 1 at 0x7f890f701b27 thread T0
+    #0 0x55c86580a279 in tui_draw_mode tui/tui.c:135
+    #1 0x55c86580a792 in tui_refresh tui/tui.c:185
+    #2 0x55c865807a85 in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:106
+    #3 0x55c86580870f in main /home/blake/Documents/c_prog/jbvim/main.c:236
+    #4 0x7f8911a35487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x7f8911a3554b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x55c8658072f4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32f4) (BuildId: 1d0b72d07c0a52fc9b498dc31d32fcb22fdfa8f0)
+
+Address 0x7f890f701b27 is located in stack of thread T0 at offset 39 in frame
+    #0 0x55c865809d7c in tui_draw_mode tui/tui.c:117
+
+  This frame has 4 object(s):
+    [32, 39) 'mode_str' (line 120) <== Memory access at offset 39 overflows this variable
+    [64, 71) 'str' (line 123)
+    [96, 103) 'str' (line 128)
+    [128, 136) 'str' (line 133)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow tui/tui.c:135 in tui_draw_mode
+Shadow bytes around the buggy address:
+  0x7f890f701880: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f890f701900: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f890f701980: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f890f701a00: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f890f701a80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7f890f701b00: f1 f1 f1 f1[07]f2 f2 f2 07 f2 f2 f2 07 f2 f2 f2
+  0x7f890f701b80: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f890f701c00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f890f701c80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f890f701d00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f890f701d80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==191149==ABORTING
+=================================================================
+==192776==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7efc16300227 at pc 0x55bdebf5627a bp 0x7fffe9a639f0 sp 0x7fffe9a639e0
+WRITE of size 1 at 0x7efc16300227 thread T0
+    #0 0x55bdebf56279 in tui_draw_mode tui/tui.c:135
+    #1 0x55bdebf56792 in tui_refresh tui/tui.c:185
+    #2 0x55bdebf53a85 in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:106
+    #3 0x55bdebf5470f in main /home/blake/Documents/c_prog/jbvim/main.c:236
+    #4 0x7efc18635487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x7efc1863554b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x55bdebf532f4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32f4) (BuildId: 1d0b72d07c0a52fc9b498dc31d32fcb22fdfa8f0)
+
+Address 0x7efc16300227 is located in stack of thread T0 at offset 39 in frame
+    #0 0x55bdebf55d7c in tui_draw_mode tui/tui.c:117
+
+  This frame has 4 object(s):
+    [32, 39) 'mode_str' (line 120) <== Memory access at offset 39 overflows this variable
+    [64, 71) 'str' (line 123)
+    [96, 103) 'str' (line 128)
+    [128, 136) 'str' (line 133)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow tui/tui.c:135 in tui_draw_mode
+Shadow bytes around the buggy address:
+  0x7efc162fff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7efc16300000: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7efc16300080: f5 f5 f5 f5 f5 f5 f5 f5 00 00 00 00 00 00 00 00
+  0x7efc16300100: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7efc16300180: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7efc16300200: f1 f1 f1 f1[07]f2 f2 f2 07 f2 f2 f2 07 f2 f2 f2
+  0x7efc16300280: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7efc16300300: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7efc16300380: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7efc16300400: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7efc16300480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==192776==ABORTING
+=================================================================
+==193432==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7f133af00227 at pc 0x55e127b72241 bp 0x7ffc7edac450 sp 0x7ffc7edac440
+WRITE of size 1 at 0x7f133af00227 thread T0
+    #0 0x55e127b72240 in tui_draw_mode tui/tui.c:135
+    #1 0x55e127b72759 in tui_refresh tui/tui.c:185
+    #2 0x55e127b6fa4c in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:100
+    #3 0x55e127b706d6 in main /home/blake/Documents/c_prog/jbvim/main.c:230
+    #4 0x7f133d235487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x7f133d23554b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x55e127b6f2f4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32f4) (BuildId: 51344cc370ce82c73c07ad6477a88674f052833c)
+
+Address 0x7f133af00227 is located in stack of thread T0 at offset 39 in frame
+    #0 0x55e127b71d43 in tui_draw_mode tui/tui.c:117
+
+  This frame has 4 object(s):
+    [32, 39) 'mode_str' (line 120) <== Memory access at offset 39 overflows this variable
+    [64, 71) 'str' (line 123)
+    [96, 103) 'str' (line 128)
+    [128, 136) 'str' (line 133)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow tui/tui.c:135 in tui_draw_mode
+Shadow bytes around the buggy address:
+  0x7f133aefff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f133af00000: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f133af00080: f5 f5 f5 f5 f5 f5 f5 f5 00 00 00 00 00 00 00 00
+  0x7f133af00100: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f133af00180: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7f133af00200: f1 f1 f1 f1[07]f2 f2 f2 07 f2 f2 f2 07 f2 f2 f2
+  0x7f133af00280: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f133af00300: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f133af00380: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f133af00400: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f133af00480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==193432==ABORTING
+=================================================================
+==193523==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7fdfc0309e27 at pc 0x5626ed09e241 bp 0x7fff14407930 sp 0x7fff14407920
+WRITE of size 1 at 0x7fdfc0309e27 thread T0
+    #0 0x5626ed09e240 in tui_draw_mode tui/tui.c:135
+    #1 0x5626ed09e759 in tui_refresh tui/tui.c:185
+    #2 0x5626ed09ba4c in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:100
+    #3 0x5626ed09c6d6 in main /home/blake/Documents/c_prog/jbvim/main.c:230
+    #4 0x7fdfc2635487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x7fdfc263554b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x5626ed09b2f4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32f4) (BuildId: 51344cc370ce82c73c07ad6477a88674f052833c)
+
+Address 0x7fdfc0309e27 is located in stack of thread T0 at offset 39 in frame
+    #0 0x5626ed09dd43 in tui_draw_mode tui/tui.c:117
+
+  This frame has 4 object(s):
+    [32, 39) 'mode_str' (line 120) <== Memory access at offset 39 overflows this variable
+    [64, 71) 'str' (line 123)
+    [96, 103) 'str' (line 128)
+    [128, 136) 'str' (line 133)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow tui/tui.c:135 in tui_draw_mode
+Shadow bytes around the buggy address:
+  0x7fdfc0309b80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7fdfc0309c00: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7fdfc0309c80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7fdfc0309d00: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7fdfc0309d80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7fdfc0309e00: f1 f1 f1 f1[07]f2 f2 f2 07 f2 f2 f2 07 f2 f2 f2
+  0x7fdfc0309e80: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7fdfc0309f00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7fdfc0309f80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7fdfc030a000: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7fdfc030a080: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==193523==ABORTING
+=================================================================
+==193645==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7f3786504027 at pc 0x55cdf33a2241 bp 0x7ffd80d9e9f0 sp 0x7ffd80d9e9e0
+WRITE of size 1 at 0x7f3786504027 thread T0
+    #0 0x55cdf33a2240 in tui_draw_mode tui/tui.c:135
+    #1 0x55cdf33a2759 in tui_refresh tui/tui.c:185
+    #2 0x55cdf339fa4c in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:100
+    #3 0x55cdf33a06d6 in main /home/blake/Documents/c_prog/jbvim/main.c:230
+    #4 0x7f3788835487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x7f378883554b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x55cdf339f2f4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32f4) (BuildId: 397ce0220305c8166d153b6c7a58bc5bdbd1bfed)
+
+Address 0x7f3786504027 is located in stack of thread T0 at offset 39 in frame
+    #0 0x55cdf33a1d43 in tui_draw_mode tui/tui.c:117
+
+  This frame has 4 object(s):
+    [32, 39) 'mode_str' (line 120) <== Memory access at offset 39 overflows this variable
+    [64, 71) 'str' (line 123)
+    [96, 103) 'str' (line 128)
+    [128, 136) 'str' (line 133)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow tui/tui.c:135 in tui_draw_mode
+Shadow bytes around the buggy address:
+  0x7f3786503d80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f3786503e00: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f3786503e80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f3786503f00: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f3786503f80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7f3786504000: f1 f1 f1 f1[07]f2 f2 f2 07 f2 f2 f2 07 f2 f2 f2
+  0x7f3786504080: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f3786504100: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f3786504180: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f3786504200: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f3786504280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==193645==ABORTING
+=================================================================
+==193759==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7f5bb3101e27 at pc 0x55a74660f241 bp 0x7ffc4ebe8690 sp 0x7ffc4ebe8680
+WRITE of size 1 at 0x7f5bb3101e27 thread T0
+    #0 0x55a74660f240 in tui_draw_mode tui/tui.c:135
+    #1 0x55a74660f759 in tui_refresh tui/tui.c:185
+    #2 0x55a74660ca4c in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:100
+    #3 0x55a74660d6d6 in main /home/blake/Documents/c_prog/jbvim/main.c:230
+    #4 0x7f5bb5435487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x7f5bb543554b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x55a74660c2f4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32f4) (BuildId: 1b41dd034e9d70bda9b7aebd7a82f45379b6457e)
+
+Address 0x7f5bb3101e27 is located in stack of thread T0 at offset 39 in frame
+    #0 0x55a74660ed43 in tui_draw_mode tui/tui.c:117
+
+  This frame has 4 object(s):
+    [32, 39) 'mode_str' (line 120) <== Memory access at offset 39 overflows this variable
+    [64, 71) 'str' (line 123)
+    [96, 103) 'str' (line 128)
+    [128, 136) 'str' (line 133)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow tui/tui.c:135 in tui_draw_mode
+Shadow bytes around the buggy address:
+  0x7f5bb3101b80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f5bb3101c00: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f5bb3101c80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f5bb3101d00: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f5bb3101d80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7f5bb3101e00: f1 f1 f1 f1[07]f2 f2 f2 07 f2 f2 f2 07 f2 f2 f2
+  0x7f5bb3101e80: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f5bb3101f00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f5bb3101f80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f5bb3102000: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f5bb3102080: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==193759==ABORTING
+=================================================================
+==193921==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7f415290bc27 at pc 0x556050dba25c bp 0x7ffd903f1250 sp 0x7ffd903f1240
+WRITE of size 1 at 0x7f415290bc27 thread T0
+    #0 0x556050dba25b in tui_draw_mode tui/tui.c:135
+    #1 0x556050dba774 in tui_refresh tui/tui.c:185
+    #2 0x556050db7a4c in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:100
+    #3 0x556050db86f1 in main /home/blake/Documents/c_prog/jbvim/main.c:231
+    #4 0x7f4154c35487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x7f4154c3554b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x556050db72f4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32f4) (BuildId: 59404ef432258537956747bb6217e41f0580bf9f)
+
+Address 0x7f415290bc27 is located in stack of thread T0 at offset 39 in frame
+    #0 0x556050db9d5e in tui_draw_mode tui/tui.c:117
+
+  This frame has 4 object(s):
+    [32, 39) 'mode_str' (line 120) <== Memory access at offset 39 overflows this variable
+    [64, 71) 'str' (line 123)
+    [96, 103) 'str' (line 128)
+    [128, 136) 'str' (line 133)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow tui/tui.c:135 in tui_draw_mode
+Shadow bytes around the buggy address:
+  0x7f415290b980: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f415290ba00: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f415290ba80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f415290bb00: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f415290bb80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7f415290bc00: f1 f1 f1 f1[07]f2 f2 f2 07 f2 f2 f2 07 f2 f2 f2
+  0x7f415290bc80: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f415290bd00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f415290bd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f415290be00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f415290be80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==193921==ABORTING
+=================================================================
+==194051==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7f552c900c27 at pc 0x5565f7a39261 bp 0x7ffdf154b520 sp 0x7ffdf154b510
+WRITE of size 1 at 0x7f552c900c27 thread T0
+    #0 0x5565f7a39260 in tui_draw_mode tui/tui.c:135
+    #1 0x5565f7a39779 in tui_refresh tui/tui.c:185
+    #2 0x5565f7a36a4c in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:100
+    #3 0x5565f7a376f6 in main /home/blake/Documents/c_prog/jbvim/main.c:231
+    #4 0x7f552ec35487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x7f552ec3554b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x5565f7a362f4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32f4) (BuildId: 8adedb21098f4f74a3d5d227f17ae5fcb64b1de6)
+
+Address 0x7f552c900c27 is located in stack of thread T0 at offset 39 in frame
+    #0 0x5565f7a38d63 in tui_draw_mode tui/tui.c:117
+
+  This frame has 4 object(s):
+    [32, 39) 'mode_str' (line 120) <== Memory access at offset 39 overflows this variable
+    [64, 71) 'str' (line 123)
+    [96, 103) 'str' (line 128)
+    [128, 136) 'str' (line 133)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow tui/tui.c:135 in tui_draw_mode
+Shadow bytes around the buggy address:
+  0x7f552c900980: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f552c900a00: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f552c900a80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f552c900b00: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f552c900b80: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7f552c900c00: f1 f1 f1 f1[07]f2 f2 f2 07 f2 f2 f2 07 f2 f2 f2
+  0x7f552c900c80: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f552c900d00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f552c900d80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f552c900e00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f552c900e80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==194051==ABORTING
+=================================================================
+==194153==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7fc104300227 at pc 0x55e69769e261 bp 0x7ffed03b0fc0 sp 0x7ffed03b0fb0
+WRITE of size 1 at 0x7fc104300227 thread T0
+    #0 0x55e69769e260 in tui_draw_mode tui/tui.c:135
+    #1 0x55e69769e779 in tui_refresh tui/tui.c:185
+    #2 0x55e69769ba4c in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:100
+    #3 0x55e69769c6f6 in main /home/blake/Documents/c_prog/jbvim/main.c:231
+    #4 0x7fc106635487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x7fc10663554b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x55e69769b2f4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32f4) (BuildId: 8adedb21098f4f74a3d5d227f17ae5fcb64b1de6)
+
+Address 0x7fc104300227 is located in stack of thread T0 at offset 39 in frame
+    #0 0x55e69769dd63 in tui_draw_mode tui/tui.c:117
+
+  This frame has 4 object(s):
+    [32, 39) 'mode_str' (line 120) <== Memory access at offset 39 overflows this variable
+    [64, 71) 'str' (line 123)
+    [96, 103) 'str' (line 128)
+    [128, 136) 'str' (line 133)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow tui/tui.c:135 in tui_draw_mode
+Shadow bytes around the buggy address:
+  0x7fc1042fff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7fc104300000: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7fc104300080: f5 f5 f5 f5 f5 f5 f5 f5 00 00 00 00 00 00 00 00
+  0x7fc104300100: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7fc104300180: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7fc104300200: f1 f1 f1 f1[07]f2 f2 f2 07 f2 f2 f2 07 f2 f2 f2
+  0x7fc104300280: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7fc104300300: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7fc104300380: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7fc104300400: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7fc104300480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==194153==ABORTING
+=================================================================
+==194270==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7f4696f00227 at pc 0x55a85029b261 bp 0x7fff14cf8020 sp 0x7fff14cf8010
+WRITE of size 1 at 0x7f4696f00227 thread T0
+    #0 0x55a85029b260 in tui_draw_mode tui/tui.c:135
+    #1 0x55a85029b779 in tui_refresh tui/tui.c:185
+    #2 0x55a850298a4c in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:100
+    #3 0x55a8502996f6 in main /home/blake/Documents/c_prog/jbvim/main.c:231
+    #4 0x7f4699235487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x7f469923554b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x55a8502982f4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32f4) (BuildId: 8adedb21098f4f74a3d5d227f17ae5fcb64b1de6)
+
+Address 0x7f4696f00227 is located in stack of thread T0 at offset 39 in frame
+    #0 0x55a85029ad63 in tui_draw_mode tui/tui.c:117
+
+  This frame has 4 object(s):
+    [32, 39) 'mode_str' (line 120) <== Memory access at offset 39 overflows this variable
+    [64, 71) 'str' (line 123)
+    [96, 103) 'str' (line 128)
+    [128, 136) 'str' (line 133)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow tui/tui.c:135 in tui_draw_mode
+Shadow bytes around the buggy address:
+  0x7f4696efff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f4696f00000: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f4696f00080: f5 f5 f5 f5 f5 f5 f5 f5 00 00 00 00 00 00 00 00
+  0x7f4696f00100: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f4696f00180: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7f4696f00200: f1 f1 f1 f1[07]f2 f2 f2 07 f2 f2 f2 07 f2 f2 f2
+  0x7f4696f00280: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f4696f00300: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f4696f00380: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f4696f00400: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f4696f00480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==194270==ABORTING
+=================================================================
+==197305==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7f6d82d00927 at pc 0x56435dfbd261 bp 0x7ffee53cbb70 sp 0x7ffee53cbb60
+WRITE of size 1 at 0x7f6d82d00927 thread T0
+    #0 0x56435dfbd260 in tui_draw_mode tui/tui.c:135
+    #1 0x56435dfbd779 in tui_refresh tui/tui.c:185
+    #2 0x56435dfbaa4c in handle_normal_mode /home/blake/Documents/c_prog/jbvim/main.c:100
+    #3 0x56435dfbb6f6 in main /home/blake/Documents/c_prog/jbvim/main.c:231
+    #4 0x7f6d85035487  (/usr/lib/libc.so.6+0x27487) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #5 0x7f6d8503554b in __libc_start_main (/usr/lib/libc.so.6+0x2754b) (BuildId: 0b707b217b15b106c25fe51df3724b25848310c0)
+    #6 0x56435dfba2f4 in _start (/home/blake/Documents/c_prog/jbvim/main+0x32f4) (BuildId: 8adedb21098f4f74a3d5d227f17ae5fcb64b1de6)
+
+Address 0x7f6d82d00927 is located in stack of thread T0 at offset 39 in frame
+    #0 0x56435dfbcd63 in tui_draw_mode tui/tui.c:117
+
+  This frame has 4 object(s):
+    [32, 39) 'mode_str' (line 120) <== Memory access at offset 39 overflows this variable
+    [64, 71) 'str' (line 123)
+    [96, 103) 'str' (line 128)
+    [128, 136) 'str' (line 133)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow tui/tui.c:135 in tui_draw_mode
+Shadow bytes around the buggy address:
+  0x7f6d82d00680: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f6d82d00700: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f6d82d00780: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f6d82d00800: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x7f6d82d00880: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7f6d82d00900: f1 f1 f1 f1[07]f2 f2 f2 07 f2 f2 f2 07 f2 f2 f2
+  0x7f6d82d00980: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f6d82d00a00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f6d82d00a80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f6d82d00b00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f6d82d00b80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==197305==ABORTING

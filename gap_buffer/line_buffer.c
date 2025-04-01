@@ -75,7 +75,9 @@ lineBuffer init_line(char *line_content) {
         string_len = len_string(line_content);
 
         for (int i = 0; i < string_len; i++) {
-            insert_left_line(&line, line_content[i]);
+            if (line_content[i] != '\n') {
+                insert_left_line(&line, line_content[i]);
+            }
         }
     }
 
@@ -84,6 +86,12 @@ lineBuffer init_line(char *line_content) {
     }
 
     return line;
+}
+
+void reset_line(lineBuffer line) {
+    for (int i = 0; i < line.size; i++) {
+        line.buffer[i] = '\0';
+    }
 }
 
 void insert_left_line(lineBuffer *line, char character) {

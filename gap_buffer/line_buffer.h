@@ -17,6 +17,8 @@ typedef struct lineBuffer {
 
 lineBuffer init_line(char *line_content);
 
+void reset_line(lineBuffer line);
+
 void move_gap_right_line(lineBuffer *line);
 
 void move_gap_left_line(lineBuffer *line);
