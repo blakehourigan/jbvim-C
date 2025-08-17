@@ -15,6 +15,9 @@ typedef struct DocumentGapBuffer {
     int used_lines; // keeps track of how many lines are in **use** by the user
                     // currently.
     int size;       // total current allocated size
+
+    char *file_name_ptr; // ptr to the file name variable. makes freeing memory
+                         // possible.
 } DocumentGapBuffer;
 
 DocumentGapBuffer init_document(char *str);
@@ -45,5 +48,7 @@ void dbg_buffer_doc(DocumentGapBuffer *document);
 void dbg_doc_simple(DocumentGapBuffer *document);
 
 void delete_document_line(DocumentGapBuffer *document);
+
+void cleanup_document(DocumentGapBuffer *document);
 
 #endif

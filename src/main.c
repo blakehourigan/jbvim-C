@@ -6,12 +6,12 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/ioctl.h>
 #include <termios.h>
-#include <time.h>
 #include <unistd.h>
 
-const size_t COMMAND_SIZE = 50;
+const int MAX_COMMAND_SIZE = 50;
 
 void basic_movement_handler(unsigned char *input, struct EditorState *state,
                             DocumentGapBuffer *document) {
@@ -20,7 +20,6 @@ void basic_movement_handler(unsigned char *input, struct EditorState *state,
     char error_msg[] = "keyboard shortcut not found";
 
     lineBuffer line = *(document->end);
-    int input_num = *input;
 
     switch (*input) {
     case 3:
@@ -105,7 +104,6 @@ void handle_normal_mode(unsigned char *input, struct EditorState *state,
 void process_command(struct EditorState *state, char *command,
                      DocumentGapBuffer *document) {
     int i = 0;
-    char c = command[0];
     while (1) {
         char c = command[i];
         switch (c) {
@@ -114,13 +112,13 @@ void process_command(struct EditorState *state, char *command,
             tui_disable_raw_mode(&state->og_settings);
             // cleanup and exit the program with noramal exit status
             free(command);
-            free(document->buffer);
+            cleanup_document(document);
             exit(0);
             break;
         default:
             break;
         }
-        if (i >= COMMAND_SIZE) {
+        if (i >= MAX_COMMAND_SIZE) {
             break;
         }
         i++;
@@ -128,7 +126,12 @@ void process_command(struct EditorState *state, char *command,
 }
 void handle_command_mode(unsigned char *input, struct EditorState *state,
                          DocumentGapBuffer *document, EditorInfoBar *info_bar) {
-    char *command = malloc(sizeof(char) * COMMAND_SIZE);
+
+    /*
+     * This function is designed to handle the vim command mode, where the user
+     * can save files and exit from the current file.
+     */
+    char *command = malloc(sizeof(char) * MAX_COMMAND_SIZE);
     if (!command) {
         return;
     }
@@ -178,6 +181,9 @@ int main(int argc, char *argv[]) {
     struct Cursor previous_cursor_pos;
     struct EditorState *state = malloc(sizeof(struct EditorState));
 
+    previous_cursor_pos.col = 0;
+    previous_cursor_pos.line = 0;
+
     state->mode = Normal;
     state->og_settings = termios_og;
     state->previous_curs_pos = previous_cursor_pos;
@@ -193,9 +199,9 @@ int main(int argc, char *argv[]) {
 
     // if
     if (argc > 1) {
-        file_name = argv[1];
+        strcpy(file_name, argv[1]);
     } else {
-        file_name = "tmp.txt";
+        strcpy(file_name, "tmp.txt");
     }
     DocumentGapBuffer document = init_document(file_name);
 

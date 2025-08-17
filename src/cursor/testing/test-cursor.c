@@ -1,5 +1,5 @@
-#include "../tui/tui.h"
-#include "cursor.h"
+#include "../../tui/tui.h"
+#include "../cursor.h"
 #include <stdlib.h>
 #include <termios.h>
 #include <unistd.h>
@@ -28,6 +28,7 @@ int main() {
     tui_enable_alternate_buffer();
     tui_enable_raw_mode(&termios_p, &termios_og);
     cursor_move_home();
+    test_coloring();
 
     test_get_coords();
 

@@ -4,6 +4,7 @@
 #include <asm-generic/ioctls.h>
 
 #include <stdlib.h>
+#include <string.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
 
@@ -117,23 +118,16 @@ void tui_setup(struct termios *termios_og) {
 static void tui_draw_mode(EditorInfoBar *info_bar, enum EditorMode *mode) {
     cursor_set_foreground(5);
 
-    char mode_str[7];
+    int max_mode_chars = 8;
+    char mode_str[max_mode_chars];
 
     if (*mode == Normal) {
-        char str[] = "Normal";
-        for (int i = 0; i < sizeof(str); i++) {
-            mode_str[i] = str[i];
-        }
+        strcpy(mode_str, "Normal");
+
     } else if (*mode == Insert) {
-        char str[] = "Insert";
-        for (int i = 0; i < sizeof(str); i++) {
-            mode_str[i] = str[i];
-        }
+        strcpy(mode_str, "Insert");
     } else if (*mode == Command) {
-        char str[] = "Command";
-        for (int i = 0; i < sizeof(str); i++) {
-            mode_str[i] = str[i];
-        }
+        strcpy(mode_str, "Command");
     }
 
     size_t str_size = sizeof(mode_str);

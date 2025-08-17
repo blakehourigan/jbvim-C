@@ -19,6 +19,7 @@ DocumentGapBuffer init_document(char *file_name) {
 
     document.used_lines = 0;
     document.size = INIT_DOC_SIZE;
+    document.file_name_ptr = file_name;
 
     // for line in the string, create a line buffer, and store a pointer to
     // that line buffer in the buffer, in order in which they appear in the
@@ -322,7 +323,7 @@ void print_content(DocumentGapBuffer *document) {
     }
 }
 
-void cleanup(DocumentGapBuffer *document) {
+void cleanup_document(DocumentGapBuffer *document) {
     /* Cleanup all the memory we allocated for all line buffers and the
      * document's buffer itself.
      */
@@ -332,6 +333,7 @@ void cleanup(DocumentGapBuffer *document) {
         free(line.buffer);
     }
     free(document->buffer);
+    free(document->file_name_ptr);
 }
 
 // int main(int argc, char *argv[]) {

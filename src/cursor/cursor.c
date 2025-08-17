@@ -6,8 +6,11 @@
 #include <unistd.h>
 
 static void sort_response(Cursor *curs, char *s) {
+    /*
+     * Helper function to cursor_get_coords. Parses the response from the
+     * terminal when cursor position is requested.
+     */
     int len = sizeof(s);
-    int row = 0;
 
     int read_row = 0;
     int read_col = 0;
@@ -134,9 +137,3 @@ void cursor_backspace() {
 }
 
 void cursor_write_char(char character) { write(STDOUT_FILENO, &character, 1); }
-
-void delay(int seconds) {
-    unsigned int ret_time = time(0) + seconds;
-    while (time(0) < ret_time) {
-    }
-}
