@@ -8,15 +8,15 @@
 #include <termios.h>
 
 typedef struct ContentOffset {
-  int offset;
+    int offset;
 } ContentOffset;
 
 typedef struct EditorInfoBar {
-  int col_length;
-  int row;
-  int command_row;
-  int cursor_location_col;
-  int editor_mode_col;
+    int col_length;
+    int row;
+    int command_row;
+    int cursor_location_col;
+    int editor_mode_col;
 } EditorInfoBar;
 
 EditorInfoBar build_info();

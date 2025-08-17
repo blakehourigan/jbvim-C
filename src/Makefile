@@ -4,7 +4,7 @@ ASANFLAGS = -fsanitize=address
 LDFLAGS = $(ASANFLAGS)
 
 
-EXEC = main
+EXEC = jbvim 
 
 # src files 
 SRCS = main.c cursor/cursor.c tui/tui.c gap_buffer/line_buffer.c gap_buffer/document_buffer.c

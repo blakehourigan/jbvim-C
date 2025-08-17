@@ -5,8 +5,8 @@
 #define CURSOR_H
 
 typedef struct Cursor {
-  int line;
-  int col;
+    int line;
+    int col;
 } Cursor;
 
 // Cursor *build_cursor(int line, int col);

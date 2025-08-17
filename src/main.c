@@ -3,7 +3,6 @@
 #include "gap_buffer/document_buffer.h"
 #include "gap_buffer/line_buffer.h"
 #include "tui/tui.h"
-#include <signal.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
